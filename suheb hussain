@@ -1,0 +1,151 @@
+def block_ip(ip_address):
+    """Block an IP address using iptables."""
+    os.system(f"sudo iptables -A INPUT -s {ip_address} -j DROP")
+
+def allow_ip(ip_address):
+    """Allow an IP address using iptables."""
+    os.system(f"sudo iptables -D INPUT -s {ip_address} -j DROP")
+
+# Example Usage:
+block_ip("192.168.1.100")
+# To unblock, use:
+allow_ip("192.168.1.100")
+"""Scan a file for malware using ClamAV."""
+    result = os.system(f"clamscan {file_path}")
+    if result == 0:
+        print("No malware detected.")
+    else:
+        print("Malware detected!")
+
+# Example Usage:
+scan_file("/path/to/your/file.txt") """Encrypt a file using AES-256."""
+    cipher = AES.new(key, AES.MODE_EAX)
+    with open(file_name, 'rb') as file:
+        plaintext = file.read()
+
+    nonce = cipher.nonce
+    ciphertext, tag = cipher.encrypt_and_digest(plaintext)
+
+    with open(file_name + '.enc', 'wb') as file:
+        file.write(nonce)
+        file.write(ciphertext)
+
+def decrypt_file(file_name, key):
+    """Decrypt an AES-256 encrypted file."""
+    with open(file_name, 'rb') as file:
+        nonce = file.read(16)
+        ciphertext = file.read()
+
+    cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
+    plaintext = cipher.decrypt(ciphertext)
+
+    with open(file_name[:-4], 'wb') as file:
+        file.write(plaintext)
+app = Flask(_name_)
+app.secret_key = 'supersecretkey'
+
+# Dummy user for illustration
+users = {"user1": "password123"}
+
+# Setup TOTP for 2FA (for demo purposes, using a fixed key)
+totp = pyotp.TOTP('base32secret3232')
+
+@app.route('/')
+def index():
+    if 'user' in session:
+        return f"Logged in as {session['user']} <br><a href='/logout'>Logout</a>"
+    return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+
+    if username in users and users[username] == password:
+        session['user'] = username
+        return redirect(url_for('two_factor'))
+
+    return "Invalid credentials, please try again."
+
+@app.route('/two_factor', methods=['GET', 'POST'])
+def two_factor():
+    if request.method == 'POST':
+        otp = request.form['otp']
+        if totp.verify(otp):
+            return "2FA verified. Welcome!"
+        return "Invalid OTP, please try again."
+
+    return render_template('two_factor.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('index'))
+
+if _name_ == '_Suha firewall_':
+    app.run(debug=True)
+# Set up logging
+logging.basicConfig(filename="security.log", level=logging.INFO)
+
+def send_alert(message):
+    """Send an email alert when a security issue is detected."""
+    msg = MIMEText(message)
+    msg['Subject'] = "Security Alert"
+    msg['From'] = "msuheb68@gmail.com"
+    msg['To'] = "admin@example.com"
+
+    # Send email
+    with smtplib.SMTP('smtp.example.com', 587) as server:
+        server.starttls()
+        server.login("youremail@example.com", "yourpassword")
+        server.send_message(msg)
+
+def log_event(event_message):
+    """Log a security event and send an alert if necessary."""
+    logging.info(event_message)
+    
+    if "CRITICAL" in event_message:
+        send_alert(event_message)
+
+# Example Usage:
+log_event("CRITICAL: Unauthorized login attempt detected.")"""Backup a file to the specified directory."""
+    if not os.path.exists(backup_dir):
+        os.makedirs(backup_dir)
+
+    shutil.copy(file_path, backup_dir)
+    print(f"{file_path} has been backed up to {backup_dir}")
+
+# Example Usage:
+backup_file("important_data.txt", "/path/to/backup/")server_socket = socket.socket()  
+    server_socket.bind(('127.0.0.1', 5000))  
+    server_socket.listen(1)
+    conn, address = server_socket.accept()  
+    print("Connection from: " + str(address))
+    
+    while True:
+        data = conn.recv(1024).decode()
+        if not data:
+            break
+        print(f"Received from client: {data}")
+        conn.send(data.encode())  
+
+    conn.close()
+
+if _name_ == '_Suha firewall_':
+ public void onCreate() {
+        super.onCreate();
+        Builder builder = new Builder();
+        builder.addAddress("10.0.0.2", 24); // Local VPN IP address
+        builder.addRoute("0.0.0.0", 0); // Route all traffic through this VPN
+        ParcelFileDescriptor vpnInterface = builder.establish(); // Establish VPN connection
+
+        // Code to monitor traffic here...
+    }
+
+    // Process data and filter traffic
+    private void processTraffic(ParcelFileDescriptor vpnInterface) {
+        FileInputStream input = new FileInputStream(vpnInterface.getFileDescriptor());
+        FileOutputStream output = new FileOutputStream(vpnInterface.getFileDescriptor());
+
+
+
