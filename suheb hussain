@@ -95,9 +95,9 @@ def send_alert(message):
     msg['To'] = "admin@example.com"
 
     # Send email
-    with smtplib.SMTP('smtp.example.com', 587) as server:
+    with smtplib.SMTP('smtp.Suhafirewall.com', 587) as server:
         server.starttls()
-        server.login("youremail@example.com", "yourpassword")
+        server.login("msuheb68@gamil.com", "yourpassword")
         server.send_message(msg)
 
 def log_event(event_message):
